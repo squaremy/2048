@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 public class Tile extends JPanel {
   private int value;
@@ -11,28 +12,29 @@ public class Tile extends JPanel {
     this.myLoc = new Location(toSpawnAt);
     this.value = val;
     this.tileWidth = tileWidth;
-    setLayout(null);
+    setLayout(new GridBagLayout());
+    setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     setSize(this.tileWidth, this.tileWidth);
     setLocation(new Point(this.myLoc.getX(), this.myLoc.getY()));
     switch(this.value) {
       case 2:
         valueDisplay = new JTextField(Integer.toString(value));
-        valueDisplay.setSize(this.tileWidth, this.tileWidth);
+        valueDisplay.setSize(this.getWidth(), this.getHeight());
         valueDisplay.setEditable(false);
         valueDisplay.setHorizontalAlignment(JTextField.CENTER);
         valueDisplay.setOpaque(false);
         valueDisplay.setVisible(true);
-        add(valueDisplay, BorderLayout.CENTER);
+        add(valueDisplay);
         setBackground(Color.WHITE);
         break;
       case 4:
         valueDisplay = new JTextField(Integer.toString(value));
-        valueDisplay.setSize(this.tileWidth, this.tileWidth);
+        valueDisplay.setSize(this.getWidth(), this.getHeight());
         valueDisplay.setEditable(false);
         valueDisplay.setHorizontalAlignment(JTextField.CENTER);
         valueDisplay.setOpaque(false);
         valueDisplay.setVisible(true);
-        add(valueDisplay, BorderLayout.CENTER);
+        add(valueDisplay);
         setBackground(Color.YELLOW);
         break;
       default:
@@ -42,7 +44,7 @@ public class Tile extends JPanel {
         valueDisplay.setHorizontalAlignment(JTextField.CENTER);
         valueDisplay.setOpaque(false);
         valueDisplay.setVisible(false);
-        add(valueDisplay, BorderLayout.CENTER);
+        add(valueDisplay);
         setBackground(Color.LIGHT_GRAY);
         break;
     }

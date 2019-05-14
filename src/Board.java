@@ -1,13 +1,16 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 public class Board extends JPanel {
   private Tile tiles[][] = new Tile[4][4];
   private int boardWidth;
   private int tileWidth;
+  private Controller controller;
 
   public Board(Dimension frameSize) {
+    setFocusable(true);
+    controller = new Controller();
+    addKeyListener(controller);
     setBackground(Color.GRAY);
     boardWidth = (frameSize.getWidth() > frameSize.getHeight())? (int)frameSize.getHeight()-50:(int)frameSize.getWidth()-30;
     tileWidth = (int)(0.20*boardWidth);
@@ -20,7 +23,7 @@ public class Board extends JPanel {
     setBounds(center.getX(), center.getY(), boardWidth, boardWidth);
     GridLayout layout = new GridLayout(4, 4, (int)(0.01*boardWidth), (int)(0.01*boardWidth));
     setLayout(layout);
-    setBorder(new EmptyBorder((int)(0.01*boardWidth), (int)(0.01*boardWidth), (int)(0.01*boardWidth), (int)(0.01*boardWidth)));
+    setBorder(BorderFactory.createEmptyBorder((int)(0.01*boardWidth), (int)(0.01*boardWidth), (int)(0.01*boardWidth), (int)(0.01*boardWidth)));
     for(int i = 0; i < tiles.length; i++) {
       for(int j = 0; j < tiles[i].length; j++) {
         tiles[i][j] = new Tile(new Location(i, j), 0, tileWidth);
@@ -42,6 +45,12 @@ public class Board extends JPanel {
     else value = 2;
     tiles[x][y] = new Tile(getRandomLocation(), value, tileWidth);
     updateBoard();
+  }
+
+  public void move() {
+    if(controller.toMove != Direction.NONE) {
+      controller.toMove = Direction.NONE;
+    }
   }
 
   public void updateBoard() {
