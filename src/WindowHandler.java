@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class WindowHandler extends JFrame {
   private static Dimension screeenResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -10,7 +11,7 @@ public class WindowHandler extends JFrame {
     super(title);
     contentPane = new JPanel();
     contentPane.setLayout(null);
-    setContentPane(contentPane);
+    add(contentPane, BorderLayout.CENTER);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(windowSize);
     setMaximumSize(screeenResolution);
@@ -23,7 +24,7 @@ public class WindowHandler extends JFrame {
     this.windowSize = windowSize;
     contentPane = new JPanel();
     contentPane.setLayout(null);
-    setContentPane(contentPane);
+    add(contentPane, BorderLayout.CENTER);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(windowSize);
     setMaximumSize(screeenResolution);

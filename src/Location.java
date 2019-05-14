@@ -17,8 +17,20 @@ public class Location {
 
   public int getX() { return x; }
   public int getY() { return y; }
+  public boolean equals(Location toCompare) {
+    if(toCompare.getX() == x && toCompare.getY() == y) return true;
+    return false;
+  }
   public double getDistance(Location target) {
     double dist = Math.sqrt(Math.pow(target.getX() - x, 2) + Math.pow(target.getY() - y, 2));
     return dist;
+  }
+
+  public String toString() {
+    String toReturn = "X: ";
+    toReturn += x;
+    toReturn += " Y: ";
+    toReturn += y;
+    return toReturn;
   }
 }
