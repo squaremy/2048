@@ -13,6 +13,7 @@ public class main {
     window.add(gameBoard);
     sleep(100);
     while(window.isActive()) {
+      gameBoard.move();
       gameBoard.requestFocus();
       gameBoard.updateBoard();
       sleep(100);

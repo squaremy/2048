@@ -48,8 +48,9 @@ public class Board extends JPanel {
   }
 
   public void move() {
-    if(controller.toMove != Direction.NONE) {
-      controller.toMove = Direction.NONE;
+    if(controller.toMove != Controller.Direction.NONE) {
+      // MOVE AND COMBINE TILES HERE
+      controller.toMove = Controller.Direction.NONE;
     }
   }
 
