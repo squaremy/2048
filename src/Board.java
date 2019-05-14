@@ -53,6 +53,7 @@ public class Board extends JPanel {
       }
     }
     setVisible(true);
+    revalidate();
     repaint();
   }
 

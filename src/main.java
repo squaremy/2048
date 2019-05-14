@@ -15,7 +15,6 @@ public class main {
     while(window.isActive()) {
       gameBoard.requestFocus();
       gameBoard.updateBoard();
-      window.repaint();
       sleep(100);
     }
   }
