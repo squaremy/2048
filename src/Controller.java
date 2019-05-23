@@ -7,7 +7,7 @@ public class Controller implements KeyListener {
   public enum Direction {
     N, S, W, E, NONE
   };
-  public Direction toMove = Direction.NONE;
+  public volatile Direction toMove = Direction.NONE;
 
   @Override
   public void keyTyped(KeyEvent e) {
