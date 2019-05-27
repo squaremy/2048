@@ -95,6 +95,9 @@ public class Tile extends JPanel {
       case 2048:
         setBackground(new Color(239, 194, 43));
         break;
+      case 4096:
+        setBackground(new Color(255, 255, 255));
+        break;
       default:
         setBackground(Color.LIGHT_GRAY);
         break;

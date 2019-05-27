@@ -32,6 +32,7 @@ public class Board extends JPanel {
     }
     spawnTile();
     spawnTile();
+    spawnTile(4096);
   }
 
   public void spawnTile() {
@@ -46,6 +47,11 @@ public class Board extends JPanel {
     else value = 2;
     tiles[x][y] = new Tile(getRandomLocation(), value, tileWidth);
     updateBoard();
+  }
+
+  public void spawnTile(int value) {
+    Location randomTile = getRandomLocation();
+    tiles[(int)randomTile.getX()][(int)randomTile.getY()] = new Tile(randomTile, value, tileWidth);
   }
 
   public void move() {
