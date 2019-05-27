@@ -32,26 +32,25 @@ public class Board extends JPanel {
     }
     spawnTile();
     spawnTile();
-    spawnTile(4096);
+    spawnTile(2048);
   }
 
   public void spawnTile() {
+    int value = (int)(Math.random()*100);
+    if(value > 66) value = 4;
+    else value = 2;
+    spawnTile(value);
+  }
+
+  public void spawnTile(int value) {
     int x = (int)(Math.random()*4);
     int y = (int)(Math.random()*4);
     while(tiles[x][y].getValue() != 0) {
       x = (int)(Math.random()*4);
       y = (int)(Math.random()*4);
     }
-    int value = (int)(Math.random()*100);
-    if(value > 66) value = 4;
-    else value = 2;
     tiles[x][y] = new Tile(getRandomLocation(), value, tileWidth);
     updateBoard();
-  }
-
-  public void spawnTile(int value) {
-    Location randomTile = getRandomLocation();
-    tiles[(int)randomTile.getX()][(int)randomTile.getY()] = new Tile(randomTile, value, tileWidth);
   }
 
   public void move() {
