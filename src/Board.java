@@ -222,7 +222,6 @@ public class Board extends JPanel {
     else return true;
   }
 
-
   private Location getRandomLocation() {
     int x = (int)(Math.random()*4);
     int y = (int)(Math.random()*4);
