@@ -2,13 +2,23 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/**
+ *  Class that contains everything we need for a game tile
+ *  Responsible for setting the display aspects of a tile and determining if a tile can combine with other tiles
+ **/
 public class Tile extends JPanel {
   private int value;
   private Location myLoc;
   public JTextField valueDisplay;
   private int tileWidth;
 
-  public Tile(Location toSpawnAt, int val, int tileWidth) {
+  /**
+   *  Constructor that makes a Tile given all needed aspects
+   *  @param toSpawnAt - Location for the tile to spawn into
+   *  @param val - value of the tile
+   *  @param tileWidth - width of the tile
+   **/
+  public Tile(Location toSpawnAt, int val, int tileWidth) { //defining the size of the tiles with their locations based off of height and width
     this.myLoc = new Location(toSpawnAt);
     this.value = val;
     this.tileWidth = tileWidth;
@@ -19,7 +29,11 @@ public class Tile extends JPanel {
     updateTile();
   }
 
-  public Tile(Tile toCopy) {
+  /**
+   *  Constructor that copies another tile
+   *  @param toCopy - tile to copy from
+   **/
+  public Tile(Tile toCopy) { //assigning values and retaining values
     this.value = toCopy.getValue();
     this.myLoc = toCopy.getTileLocation();
     this.tileWidth = (int)toCopy.getSize().getWidth();
@@ -27,6 +41,10 @@ public class Tile extends JPanel {
     updateTile();
   }
 
+  /**
+   *  Function to update the display of the tile
+   *  @return nothing is returned
+   **/
   public void updateTile() {
     determineText();
     setVisible(true);
@@ -34,15 +52,24 @@ public class Tile extends JPanel {
     repaint();
   }
 
-  public Location getTileLocation() { return myLoc; }
+  public Location getTileLocation() { return myLoc; } // return the tile's location
 
+  /**
+   *  Function to set the tile's location
+   *  @param target - target Location for the tile
+   **/
   public void setTileLocation(Location target) {
     this.myLoc = new Location(target);
   }
 
-  public int getValue() { return this.value; }
-  public void setValue(int val) { this.value = val; }
+  public int getValue() { return this.value; } // return the tile's value
+  public void setValue(int val) { this.value = val; } // set the tile's value
 
+  /**
+   *  function to determine if a tile can combine with another tile
+   *  @param toCombineWith - Tile to try combining with
+   *  @return true if the tiles can combine (same values), false if otherwise
+   **/
   public boolean canCombine(Tile toCombineWith) {
     if(toCombineWith.getValue() == this.value) {
       return true;
@@ -50,7 +77,11 @@ public class Tile extends JPanel {
     return false;
   }
 
-  private void determineText() {
+  /**
+   *  Function to determine the styling of a tile based on the value
+   *  @return nothing is returned
+   **/
+  private void determineText() { //assigns the colors, fonts, and fnt sizes to the tiles
     if(valueDisplay != null) remove(valueDisplay);
     if(value != 0) valueDisplay = new JTextField(Integer.toString(value));
     else valueDisplay = new JTextField();
@@ -63,7 +94,7 @@ public class Tile extends JPanel {
     valueDisplay.setVisible(true);
     switch(this.value) {
       case 2:
-        setBackground(new Color(238, 228, 218));
+        setBackground(new Color(238, 228, 218)); //all of the color values for the following tiles were grabbed from the actual game
         break;
       case 4:
         setBackground(new Color(236, 224, 200));
@@ -102,6 +133,8 @@ public class Tile extends JPanel {
         setBackground(Color.LIGHT_GRAY);
         break;
     }
+    if (this.value > 4096) setBackground(new Color(0, 0, 0)); //assigns all tiles after after 4096 to black
+
     add(valueDisplay);
   }
 }

@@ -1,9 +1,19 @@
 import java.awt.event.*;
 
+/**
+ *  Class that contains the "controller" for the game
+ *  Responsible for detecting key presses and setting a desired movement direction
+ **/
 public class Controller implements KeyListener {
 
+  /**
+   *  Default constructor
+   **/
   public Controller(){}
 
+  /**
+   *  Custom Direction object that consists of N, S, W, E, and NONE
+   **/
   public enum Direction {
     N, S, W, E, NONE
   };
@@ -14,6 +24,11 @@ public class Controller implements KeyListener {
 
   }
 
+  /**
+   *  Function that is run whenever a key is pressed, determines the direction to be moving
+   *  @param e - KeyEvent representing the key that has been pressed
+   *  @return nothing is returned
+   **/
   @Override
   public void keyPressed(KeyEvent e) {
     switch(e.getKeyCode()) {
