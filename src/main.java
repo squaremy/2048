@@ -11,6 +11,7 @@ public class main {
   static boolean running = true;
   static Dimension windowSize;
   static boolean won = false;
+  static JTextField scoreDisplay;
 
   /**
    *  Main function that runs on initialization, stats and runs game
@@ -21,23 +22,34 @@ public class main {
     windowSize = new Dimension((int)(WindowHandler.getScreenResolution().getWidth()/1.5), (int)(WindowHandler.getScreenResolution().getHeight()/1.5));
     window = new WindowHandler("2048", windowSize);
     gameBoard = new Board(window.getSize());
+    scoreDisplay = new JTextField(" " + Integer.toString(gameBoard.score));
+    scoreDisplay.setBounds(10, 5, (int)windowSize.getWidth()/3, (int)windowSize.getHeight()/3);
+    scoreDisplay.setFont(new Font("Futura", Font.BOLD, 32));
+    scoreDisplay.setBorder(BorderFactory.createEmptyBorder());
+    scoreDisplay.setEditable(false);
+    scoreDisplay.setOpaque(false);
+    scoreDisplay.setVisible(true);
     window.add(gameBoard);
+    window.add(scoreDisplay);
     window.repaint();
     window.revalidate();
     sleep(100);
-    while(window.isActive() && !gameBoard.checkForLoss()) {
-      gameBoard.requestFocus();
-      gameBoard.move();
-      window.revalidate();
-      window.repaint();
-      if(gameBoard.checkForWin() && !won) { //checks to see if game has won (by aquiring the 2048 tile) if it has been acheived display win
-        sleep(250);
-        gameWon();
-        gameBoard.setVisible(true);
+    while(window.isEnabled() && !gameBoard.checkForLoss()) {
+      if(window.isActive()) {
+        gameBoard.requestFocus();
+        gameBoard.move();
+        scoreDisplay.setText(" " + Integer.toString(gameBoard.score));
         window.revalidate();
         window.repaint();
+        if(gameBoard.checkForWin() && !won) { //checks to see if game has won (by aquiring the 2048 tile) if it has been acheived display win
+          sleep(250);
+          gameWon();
+          gameBoard.setVisible(true);
+          window.revalidate();
+          window.repaint();
+        }
+        sleep(50);
       }
-      sleep(100);
     }
     sleep(1000);
     endGame();
@@ -75,6 +87,7 @@ public class main {
     endDisplay.setHorizontalAlignment(JTextField.CENTER);
     endDisplay.setFont(new Font("Futura", Font.BOLD, 64));
     endDisplay.setBorder(BorderFactory.createEmptyBorder());
+    endDisplay.setEditable(false);
     endDisplay.setOpaque(false);
     endDisplay.setVisible(true);
     endScreen.add(endDisplay);
@@ -99,6 +112,7 @@ public class main {
     endDisplay.setHorizontalAlignment(JTextField.CENTER);
     endDisplay.setFont(new Font("Futura", Font.BOLD, 64));
     endDisplay.setBorder(BorderFactory.createEmptyBorder());
+    endDisplay.setEditable(false);
     endDisplay.setOpaque(false);
     endDisplay.setVisible(true);
     endScreen.add(endDisplay);
